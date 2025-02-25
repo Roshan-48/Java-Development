@@ -1,0 +1,20 @@
+import java.util.Scanner;
+class SunnyNumber 
+{
+	public static void main(String[] args) 
+	{
+		System.out.print("Enter a Number: ");
+		int num = new Scanner(System.in).nextInt();
+		int temp = ++num;
+		boolean flag = false;
+		for(int i=1;i<=(num/2);i++){
+			if(i*i==temp){
+				System.out.println(--num+" is a Sunny Number");
+				flag = true;
+				break;
+			}
+		}
+		if(!flag)
+			System.out.println(--num+" is not a Sunny Number");
+	}
+}

@@ -1,0 +1,26 @@
+import java.util.Scanner;
+class PrimeReacher
+{
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter the number: ");			//WRONG CODE
+		int num = sc.nextInt();
+		int den = 2;
+		while(den<=num/2)
+		{
+			if(num%den==0)
+				break;
+			den++;
+		}
+		if(num/2>den)
+		{
+			System.out.println(num);
+		}
+		else{
+			while(num/2>den)
+				num++;
+			System.out.println(num);
+		}
+	}
+}

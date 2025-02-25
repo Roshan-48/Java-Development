@@ -1,0 +1,15 @@
+import java.util.Scanner;
+class Gratitute
+{
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter the subtotal: ");
+		float subTotal = sc.nextFloat();
+		System.out.print("Enter the tip rate: ");
+		float gRate = sc.nextFloat();
+		float tip = (subTotal*gRate)/100;
+		System.out.println("The tip is "+tip+" and total is"+subTotal+tip);
+	}
+}
+
