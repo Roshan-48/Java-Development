@@ -5,6 +5,7 @@ class Restaurant
 	static long contact;
 	static String address;
 	static ArrayList<String> basket = new ArrayList<>();
+	static HashMap<Integer, Boolean> tables = new HashMap<>();
 
 	public static void main(String[] args) 
 	{
@@ -86,7 +87,7 @@ class Restaurant
 			switch(opt){
 				case 1: menu(sc); break;
 				case 2: order(sc); break;
-				case 3: tableBooking(); break;
+				case 3: tableBooking(sc); break;
 				case 4: System.out.println("Thank Uhh & Visit Again");
 						System.exit(0);break;
 				default : System.out.println("Invalid Input");break;
@@ -165,7 +166,7 @@ class Restaurant
 				break;
 			}
 			case 2:{
-				System.out.println("Enter foodId");
+				System.out.print("Enter foodId");
 				int foodId = sc.nextInt();
 				removeFoodId(foodId);
 				break;
@@ -177,29 +178,80 @@ class Restaurant
 		}
 	}
 	public static void removeFoodId(int foodId) {
-    Iterator<String> iterator = basket.iterator();
-    boolean flag = false;
+		Iterator<String> iterator = basket.iterator();
+		boolean flag = false;
 
-    while (iterator.hasNext()) {
-        String foodItem = iterator.next();
-        String[] arr = foodItem.split(" ");
-        if (arr[0].equals(String.valueOf(foodId))) {
-            iterator.remove(); 
-            flag = true;
-            System.out.println("Food Item Removed");
-            break;  
+		while (iterator.hasNext()) {
+			String foodItem = iterator.next();
+			String[] arr = foodItem.split(" ");
+			if (arr[0].equals(String.valueOf(foodId))) {
+				iterator.remove(); 
+				flag = true;
+				System.out.println("Food Item Removed");
+				break;  
+			}
+		}
+		if (!flag)
+			System.out.println("Food Item Doesn't Exist in Basket");
+	}
+
+	public static void tableBooking(Scanner sc) {
+        System.out.println("\n\tTABLE BOOKING\n");
+        System.out.println("1. Book a Table");
+        System.out.println("2. View Booked Tables");
+        System.out.println("3. Cancel a Booking");
+        System.out.println("4. Go Back");
+        System.out.print("Enter an option: ");
+        int option = sc.nextInt();
+        switch (option) {
+            case 1:
+                bookTable(sc);
+                break;
+            case 2:
+                viewBookedTables();
+                break;
+            case 3:
+                cancelBooking(sc);
+                break;
+            case 4:
+                return;
+            default:
+                System.out.println("Invalid input! Please try again.");
         }
     }
-    if (!flag) {
-        System.out.println("Food Item Doesn't Exist in Basket");
-    }
-}
 
-	public static void tableBooking(){
-		System.out.println();
-		System.out.println("	Table Booking");
-		System.out.println();
-	}
+    public static void bookTable(Scanner sc) {
+        System.out.print("Enter table number (1-10): ");
+        int tableNumber = sc.nextInt();
+        if (tables.containsKey(tableNumber) && tables.get(tableNumber)) {
+            System.out.println("Table " + tableNumber + " is already booked.");
+        } else {
+            tables.put(tableNumber, true);
+            System.out.println("Table " + tableNumber + " booked successfully!");
+        }
+    }
+
+    public static void viewBookedTables() {
+        if (tables.isEmpty()) {
+            System.out.println("No tables are booked yet.");
+        } else {
+            System.out.println("Currently booked tables:");
+            tables.forEach((table, status) -> {
+                if (status) System.out.println("Table " + table);
+            });
+        }
+    }
+
+    public static void cancelBooking(Scanner sc) {
+        System.out.print("Enter the table number to cancel the booking: ");
+        int tableNumber = sc.nextInt();
+        if (tables.containsKey(tableNumber) && tables.get(tableNumber)) {
+            tables.put(tableNumber, false);
+            System.out.println("Table " + tableNumber + " booking has been canceled.");
+        } else {
+            System.out.println("Table " + tableNumber + " is not booked.");
+        }
+    }
 	public static void billGenerate(){
 		double totalBill = 0;
 		for(String foodItem : basket){
