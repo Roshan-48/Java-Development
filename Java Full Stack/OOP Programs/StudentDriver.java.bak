@@ -1,0 +1,9 @@
+class StudentDriver 
+{
+	public static void main(String[] args) 
+	{
+		Student s1 = new Student("Roshan",21,"Sapkal","BE",123);
+		s1.displayStudent();
+
+	}
+}
