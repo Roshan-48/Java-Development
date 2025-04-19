@@ -55,7 +55,6 @@ class Mobile2{
 
 	public void addSimCard(String serviceProvider, String networkType, String type, long number) {
 		SimCard sim = new SimCard(serviceProvider, networkType, type, number);
-		SimCard sim1 = new SimCard(serviceProvider, networkType, type, number);
 		simcards[indx] = sim;
 		indx++;
 		System.out.println("Sim Card Inserted");
