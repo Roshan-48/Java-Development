@@ -37,6 +37,9 @@ public class DynamicInsertOperation {
 				
 				st.execute();
 				System.out.println(i+ " data inserted");
+				
+				sc.close();
+				conn.close();
 			}
 			
 		} catch (Exception e) {
