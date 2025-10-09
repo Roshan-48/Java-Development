@@ -18,7 +18,7 @@ public class CallableStatementImp {
 			Connection con = DriverManager.getConnection(url,user,password);
 			System.out.println(con);
 			
-			CallableStatement cs = con.prepareCall("{CALL xyz(?,?)}");
+			CallableStatement cs = con.prepareCall("CALL xyz(?,?)");
 			
 			cs.setString(1, "R%");
 			cs.setInt(2, 10000);
